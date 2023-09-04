@@ -1,0 +1,29 @@
+[
+    {
+        "id":"evtjf019320fj",
+        "title":"Event 1",
+        "start":"2023-09-05T12:00:00",
+        "end":"2023-09-05T13:00:00",
+        "description":"This is event 1",
+        "location":"Location 1",
+        "cover":"https://img.freepik.com/free-vector/modern-music-event-poster-template_1361-1292.jpg?w=2000&t=st=1693849489~exp=1693850089~hmac=9cc81ee3ea9eaa40abe3646a228d23536cd20bdaf248aff40af924e6df827838"
+    },
+    {
+        "id":"evtkadjlakdjl",
+        "title":"Event 2",
+        "start":"2023-09-05T14:00:00",
+        "end":"2023-09-05T15:00:00",
+        "description":"This is event 2",
+        "location":"Location 2",
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp"
+    },
+    {
+        "id":"evtjflkajdlkaj",
+        "title":"Event 3",
+        "start":"2023-09-06T16:00:00",
+        "end":"2023-09-06T17:00:00",
+        "description":"This is event 3",
+        "location":"Location 3",
+        "cover":"https://pony.studio/design-for-growth/wp-content/uploads/2022/06/metaverse-events-1320x690.jpeg"
+    }
+]
