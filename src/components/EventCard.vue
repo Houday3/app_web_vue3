@@ -16,7 +16,7 @@ const handleClick = async () => {
 <template>
 	<div>
 		<el-card class="box-card" :body-style="{ padding: '0px' }" @click="handleClick()">
-			<img :src="event.cover" class="image" />
+			<img :src="event.cover" class="image" lazy />
 			<div style="padding: 14px">
 				<div class="top-span">
 					<div>{{ event.name }}</div>
