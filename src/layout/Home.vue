@@ -1,7 +1,7 @@
 <script setup>
 import Header from "./Header.vue";
-import EventBoard from "../layout/EventBoard.vue";
-import DetailPage from "../components/DetailPage.vue";
+import EventBoardByHowdy from "../layout/EventBoardByHowdy.vue";
+import DetailPage from "../layout/DetailPage.vue";
 import { showDetail } from "../store/store";
 import { onMounted } from "vue";
 
