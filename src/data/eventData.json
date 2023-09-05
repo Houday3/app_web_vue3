@@ -1,29 +1,98 @@
 [
-    {
-        "id":"evtjf019320fj",
-        "title":"Event 1",
-        "start":"2023-09-05T12:00:00",
-        "end":"2023-09-05T13:00:00",
-        "description":"This is event 1",
-        "location":"Location 1",
-        "cover":"https://img.freepik.com/free-vector/modern-music-event-poster-template_1361-1292.jpg?w=2000&t=st=1693849489~exp=1693850089~hmac=9cc81ee3ea9eaa40abe3646a228d23536cd20bdaf248aff40af924e6df827838"
-    },
-    {
-        "id":"evtkadjlakdjl",
-        "title":"Event 2",
-        "start":"2023-09-05T14:00:00",
-        "end":"2023-09-05T15:00:00",
-        "description":"This is event 2",
-        "location":"Location 2",
-        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp"
-    },
-    {
-        "id":"evtjflkajdlkaj",
-        "title":"Event 3",
-        "start":"2023-09-06T16:00:00",
-        "end":"2023-09-06T17:00:00",
-        "description":"This is event 3",
-        "location":"Location 3",
-        "cover":"https://pony.studio/design-for-growth/wp-content/uploads/2022/06/metaverse-events-1320x690.jpeg"
-    }
+      {
+        "id": "evt2def456",
+        "name": "Crypto Art Gallery",
+        "start": "2023-09-02T12:00:00",
+        "end": "2023-09-02T20:00:00",
+        "description": "Join us for a virtual tour of the most intriguing crypto art pieces. Discuss the pieces with artists and understand the value proposition of NFTs.",
+        "location": "Online",
+        "howdy": 50,
+        "state": 2,
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp",
+        "tag": ["Art", "NFT", "Crypto"]
+      },
+      {
+        "id": "evt3ghi789",
+        "name": "Blockchain Symposium",
+        "start": "2023-09-03T09:00:00",
+        "end": "2023-09-03T17:00:00",
+        "description": "Hear from industry experts about the current trends and future of blockchain technology, decentralized finance (DeFi), and regulatory considerations.",
+        "location": "New York, NY",
+        "howdy": 100,
+        "state": 3,
+        "cover":"https://pony.studio/design-for-growth/wp-content/uploads/2022/06/metaverse-events-1320x690.jpeg",
+        "tag": ["Education", "Finance", "Regulatory"]
+      },
+      {
+        "id": "evt4jkl012",
+        "name": "Indie Music Fest",
+        "start": "2023-09-04T16:00:00",
+        "end": "2023-09-05T02:00:00",
+        "description": "Explore indie music culture with bands from all over the country. With live performances, food trucks, and a merchandise area, it's a celebration of music!",
+        "location": "Los Angeles, CA",
+        "howdy": 200,
+        "state": 2,
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp",
+        "tag": ["Music", "Entertainment", "Food"]
+      },
+      {
+        "id": "evt5mno345",
+        "name": "NFT Workshop",
+        "start": "2023-09-05T14:00:00",
+        "end": "2023-09-05T18:00:00",
+        "description": "In this workshop, learn how to create, buy, and sell NFTs. We will guide you through minting your first NFT and understanding the underlying technology.",
+        "location": "Online",
+        "howdy": 25,
+        "state": 1,
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp",
+        "tag": ["Tech", "Art", "Education"]
+      },
+      {
+        "id": "evt6pqr678",
+        "name": "Metaverse Meetup",
+        "start": "2023-09-06T20:00:00",
+        "end": "2023-09-07T00:00:00",
+        "description": "Join us in the Metaverse for an extraordinary meetup. Network with virtual real estate owners, metaverse developers, and other enthusiasts.",
+        "location": "Online",
+        "howdy": 40,
+        "state": 2,
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp",
+        "tag": ["Social", "Networking", "Virtual Reality"]
+      },
+      {
+        "id": "evt7stu901",
+        "name": "Virtual Reality Gaming",
+        "start": "2023-09-07T10:00:00",
+        "end": "2023-09-07T16:00:00",
+        "description": "Get hands-on experience with the latest VR gaming tech. Test out new titles and hardware, and compete in gaming challenges for prizes.",
+        "location": "San Jose, CA",
+        "howdy": 30,
+        "state": 1,
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp",
+        "tag": ["Gaming", "Tech", "Entertainment"]
+      },
+      {
+        "id": "evt8vwx234",
+        "name": "Crypto Networking Mixer",
+        "start": "2023-09-08T18:00:00",
+        "end": "2023-09-08T22:00:00",
+        "description": "Mix and mingle with leading professionals in the crypto industry. Hear short talks, engage in discussions, and enjoy some fine food and drinks.",
+        "location": "Chicago, IL",
+        "howdy": 60,
+        "state": 3,
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp",
+        "tag": ["Networking", "Crypto", "Business"]
+      },
+      {
+        "id": "evt9yza567",
+        "name": "Open Mic Poetry",
+        "start": "2023-09-09T19:00:00",
+        "end": "2023-09-09T22:00:00",
+        "description": "Express yourself in this online open mic session for poetry. Share your work and listen to others in a supportive and creative atmosphere.",
+        "location": "Online",
+        "howdy": 10,
+        "state": 1,
+        "cover":"https://coincu.com/wp-content/uploads/2022/08/METAVSUMMIT-Website-Banner-Homepage-1024x536.webp",
+        "tag": ["Art", "Literature", "Expression"]
+      }
 ]

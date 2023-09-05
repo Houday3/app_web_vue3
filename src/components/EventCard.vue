@@ -19,7 +19,7 @@ const handleClick = async () => {
 			<img :src="event.cover" class="image" />
 			<div style="padding: 14px">
 				<div class="top-span">
-					<div>{{ event.title }}</div>
+					<div>{{ event.name }}</div>
 					<div>{{ event.location }}</div>
 				</div>
 				<div class="bottom">

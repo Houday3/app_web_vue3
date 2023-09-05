@@ -25,7 +25,7 @@ onMounted(() => {
 				</template></el-image
 			>
 			<div class="content-wrap">
-				<h2 class="title">{{ event.title }}</h2>
+				<h2 class="title">{{ event.name }}</h2>
 				<el-descriptions :column="1" size="large">
 					<el-descriptions-item label="Description">
 						<p>{{ event.description }}</p></el-descriptions-item
@@ -33,10 +33,9 @@ onMounted(() => {
 					<el-descriptions-item label="Location">{{ event.location }}</el-descriptions-item>
 					<el-descriptions-item label="Start">{{ event.start }}</el-descriptions-item>
 					<el-descriptions-item label="End">{{ event.end }}</el-descriptions-item>
-					<el-descriptions-item label="Remarks">
-						<el-tag size="small">School</el-tag>
-					</el-descriptions-item>
-					<el-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province </el-descriptions-item>
+					<el-descriptions-item label="howdy">{{ event.howdy }}</el-descriptions-item>
+					<el-descriptions-item label="state">{{ event.state }}</el-descriptions-item>
+					<el-descriptions-item label="tag">{{ event.tag }}</el-descriptions-item>
 				</el-descriptions>
 			</div>
 		</div>
