@@ -34,6 +34,7 @@ const handleClick = async () => {
 .box-card {
 	width: 360px;
 	margin: 10px;
+	cursor: pointer;
 }
 .top-span {
 	display: flex;

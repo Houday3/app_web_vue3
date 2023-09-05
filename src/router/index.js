@@ -3,8 +3,8 @@ import { createRouter, createWebHashHistory } from "vue-router"
 const routes = [
     {
         path: '/',
-        name: 'EventBoard',
-        component: () => import('../layout/EventBoard.vue'),
+        name: 'Home',
+        component: () => import('../layout/Home.vue'),
         props: true,
     },
     {

@@ -4,11 +4,17 @@ import { Close } from "@element-plus/icons-vue";
 import { showDetail } from "../store/store";
 import { useRoute } from "vue-router";
 import data from "../data/eventData.json";
+import router from "../router";
 
 const route = useRoute();
 
 const eventList = ref(data);
 const event = eventList.value.find((event) => event.id === route.params.eventId);
+
+const close = () => {
+	showDetail.value = false;
+	router.push({ name: "Home" });
+};
 
 onMounted(() => {
 	console.log("mounted", event.id);
@@ -16,9 +22,9 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="modal-overlay" @click.self="showDetail = false">
+	<div class="modal-overlay" @click.self="close()">
 		<div class="modal-content">
-			<el-button class="button-close" @click="showDetail = false" :icon="Close" size="small" circle />
+			<el-button class="button-close" @click="close()" :icon="Close" size="small" circle />
 			<el-image class="cover" :src="event.cover" fit="cover">
 				<template #placeholder>
 					<div class="image-slot">Loading<span class="dot">...</span></div>
