@@ -1,9 +1,10 @@
 <script setup>
 import data from "../data/eventData.json";
-import { onMounted, ref } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import dayjs from "dayjs";
 import EventCard from "../components/EventCard.vue";
 import NoEventCard from "../components/NoEventCard.vue";
+import EventBoardByDateColumn from "../components/EventBoardByDateColumn.vue";
 
 const eventList = data; //获取eventData.json中的数据
 
@@ -14,7 +15,6 @@ const eventsByDateShowFront = ref([]);
 const eventsByDateShowBack = ref([]);
 const today = dayjs().startOf("day");
 
-let colMinWidth;
 let firstDate = today;
 let lastDate = today;
 let firstDateDiff = 0;
@@ -65,7 +65,7 @@ let columnCount; // 列数
 const setColumnCount = () => {
 	columnCount = Math.floor(window.innerWidth / minColumnWidth);
 	columnCount = columnCount > 5 ? 5 : columnCount;
-	console.log(eventsByDate.value[0].date);
+	// console.log(eventsByDate.value[0].date);
 	//计算eventsByDate第一个元素的date与今天的差值
 	let firstDateDiff = dayjs(eventsByDate.value[0].date).diff(today, "day");
 	let start = firstDateDiff < 0 ? -firstDateDiff : 0;
@@ -83,7 +83,7 @@ window.addEventListener("resize", () => {
 });
 
 //加载eventsByDateShowBack
-const loadEventsShowBack = () => {
+const loadEventsShowBack = (loadCount) => {
 	let start, end, lastElement;
 	if (eventsByDateShowBack.value.length === 0) {
 		lastElement = eventsByDateShow.value[eventsByDateShow.value.length - 1];
@@ -91,51 +91,51 @@ const loadEventsShowBack = () => {
 		lastElement = eventsByDateShowBack.value[eventsByDateShowBack.value.length - 1];
 	}
 	start = eventsByDate.value.findIndex((item) => item.date === lastElement.date) + 1;
-	end = start + 1;
+	end = start + loadCount;
 	eventsByDateShowBack.value.push(...eventsByDate.value.slice(start, end));
 };
 
 //加载eventsByDateShowFront
-const loadEventsShowFront = () => {
+const loadEventsShowFront = (loadCount) => {
 	let start, end, firstElement;
 	if (eventsByDateShowFront.value.length === 0) {
 		firstElement = eventsByDateShow.value[0];
 	} else {
 		firstElement = eventsByDateShowFront.value[0];
 	}
-	start = eventsByDate.value.findIndex((item) => item.date === firstElement.date) - 1;
-	end = start + 1;
+	start = eventsByDate.value.findIndex((item) => item.date === firstElement.date) - loadCount;
+	end = start + loadCount;
 	eventsByDateShowFront.value.unshift(...eventsByDate.value.slice(start, end));
 };
 
-onMounted(() => {
-	//监听滚动事件
-	let scrollContainer = document.querySelector(".masonry-container-wrapper"); // 替换为实际的滚动容器的选择器
-	scrollContainer.addEventListener("scroll", function () {
-		// console.log(scrollContainer.scrollLeft);
-		// console.log(maxScrollLeft);
-	});
-	//监听鼠标滚轮事件
-	window.addEventListener("wheel", function (event) {
-		if (event.deltaX > 0) {
-			const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-			if (scrollContainer.scrollLeft >= maxScrollLeft - 1) {
-				console.log("Reached the end of the X axis.");
-				// 加载eventsByDateShowBack
-				loadEventsShowBack();
-			}
-		} else if (event.deltaX < 0) {
-			console.log(scrollContainer.scrollLeft);
-			if (scrollContainer.scrollLeft <= 0) {
-				console.log("Reached the start of the X axis.");
-				// 加载eventsByDateShowFront
-				loadEventsShowFront();
-			}
+const isReachEnd = (event) => {
+	const scrollContainer = document.querySelector(".masonry-container-wrapper"); // 替换为实际的滚动容器的选择器
+	if (event.deltaX > 0) {
+		const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+		if (scrollContainer.scrollLeft >= maxScrollLeft - 1) {
+			// console.log("Reached the end of the X axis.");
+			// 加载eventsByDateShowBack
+			loadEventsShowBack(1);
 		}
-	});
+	} else if (event.deltaX < 0) {
+		if (scrollContainer.scrollLeft <= 0) {
+			console.log("Reached the start of the X axis.");
+			// 加载eventsByDateShowFront
+			loadEventsShowFront(1);
+		}
+	}
+};
+
+onMounted(() => {
+	//监听鼠标滚轮事件
+	window.addEventListener("wheel", isReachEnd);
 	//el-scrollbar的高度设置
 	const view = scrollbar.value.$el.querySelector(".el-scrollbar__view");
 	view.style.height = `${scrollbar.value.$el.clientHeight}px`;
+});
+onBeforeUnmount(() => {
+	window.removeEventListener("wheel", isReachEnd);
+	window.removeEventListener("resize", () => {});
 });
 </script>
 
@@ -143,48 +143,18 @@ onMounted(() => {
 	<el-scrollbar ref="scrollbar">
 		<div class="masonry-container-wrapper">
 			<div class="masonry-container front">
-				<div v-for="(item, index) in eventsByDateShowFront" :key="index" class="masonry-column" :style="{ minWidth: colMinWidth }">
-					<p class="date-label">{{ item.date }}</p>
-					<el-scrollbar>
-						<template v-if="item.events.length === 0">
-							<NoEventCard></NoEventCard>
-						</template>
-						<template v-else>
-							<div v-for="event in item.events" :key="event.id" class="masonry-item" :style="{ minWidth: colMinWidth }">
-								<EventCard :event="event"></EventCard>
-							</div>
-						</template>
-					</el-scrollbar>
+				<div v-for="(item, index) in eventsByDateShowFront" :key="index" class="masonry-column">
+					<EventBoardByDateColumn :eventsByDateObj="item" :key="item.date"></EventBoardByDateColumn>
 				</div>
 			</div>
 			<div class="masonry-container">
-				<div v-for="(item, index) in eventsByDateShow" :key="index" class="masonry-column" :style="{ minWidth: colMinWidth }">
-					<p class="date-label">{{ item.date }}</p>
-					<el-scrollbar>
-						<template v-if="item.events.length === 0">
-							<NoEventCard></NoEventCard>
-						</template>
-						<template v-else>
-							<div v-for="event in item.events" :key="event.id" class="masonry-item">
-								<EventCard :event="event"></EventCard>
-							</div>
-						</template>
-					</el-scrollbar>
+				<div v-for="(item, index) in eventsByDateShow" :key="index" class="masonry-column">
+					<EventBoardByDateColumn :eventsByDateObj="item"></EventBoardByDateColumn>
 				</div>
 			</div>
 			<div class="masonry-container back">
 				<div v-for="(item, index) in eventsByDateShowBack" :key="index" class="masonry-column">
-					<p class="date-label">{{ item.date }}</p>
-					<el-scrollbar>
-						<template v-if="item.events.length === 0">
-							<NoEventCard></NoEventCard>
-						</template>
-						<template v-else>
-							<div v-for="event in item.events" :key="event.id" class="masonry-item">
-								<EventCard :event="event"></EventCard>
-							</div>
-						</template>
-					</el-scrollbar>
+					<EventBoardByDateColumn :eventsByDateObj="item"></EventBoardByDateColumn>
 				</div>
 			</div>
 		</div>
@@ -202,7 +172,6 @@ onMounted(() => {
 	display: flex;
 	height: 100%;
 }
-
 .masonry-column {
 	min-width: 242px;
 	display: flex;
@@ -213,10 +182,10 @@ onMounted(() => {
 .el-scrollbar {
 	flex-grow: 1;
 }
-
 .date-label {
 	font-weight: bold;
 	margin-bottom: 8px;
+	text-align: center;
 }
 /* 
 @media (min-width: 768px) {
