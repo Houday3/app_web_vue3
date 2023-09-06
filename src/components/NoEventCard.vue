@@ -18,22 +18,6 @@ import { Picture } from "@element-plus/icons-vue";
 			</div>
 		</el-card>
 	</div>
-	<div class="square-wrapper">
-		<el-card
-			class="box-card"
-			:style="{ backgroundImage: `url(${event.cover})` }"
-			shadow="always"
-			@mouseover="showInfo = true"
-			@mouseleave="showInfo = false"
-			@click="handleClick()"
-		>
-			<div class="info-wrapper" v-show="showInfo">
-				<div class="info title">{{ event.name }}</div>
-				<div class="info location">{{ event.location }}</div>
-				<time class="info time">{{ dayjs(event.start).format("YYYY/MM/DD") + " - " + dayjs(event.end).format("YYYY/MM/DD") }}</time>
-			</div>
-		</el-card>
-	</div>
 </template>
 
 <style scoped>

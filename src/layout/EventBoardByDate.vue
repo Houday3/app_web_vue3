@@ -108,7 +108,7 @@ const loadEventsShowFront = (loadCount) => {
 	eventsByDateShowFront.value.unshift(...eventsByDate.value.slice(start, end));
 };
 
-const isReachEnd = (event) => {
+const isReachEnd = async (event) => {
 	const scrollContainer = document.querySelector(".masonry-container-wrapper"); // 替换为实际的滚动容器的选择器
 	if (event.deltaX > 0) {
 		const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
