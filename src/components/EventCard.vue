@@ -11,6 +11,9 @@ const handleClick = async () => {
 	await router.push({ name: "Detail", params: { eventId: event.id } });
 	showDetail.value = true;
 };
+
+window.addEventListener("resize", () => {
+});
 </script>
 
 <template>
@@ -32,9 +35,8 @@ const handleClick = async () => {
 
 <style scoped>
 .box-card {
-	width: 360px;
-	margin: 10px;
 	cursor: pointer;
+	min-width: 240px;
 }
 .top-span {
 	display: flex;
@@ -57,5 +59,11 @@ const handleClick = async () => {
 .image {
 	width: 100%;
 	display: block;
+}
+
+@media (max-width: 480px) {
+	.box-card {
+		min-width: 100px;
+	}
 }
 </style>

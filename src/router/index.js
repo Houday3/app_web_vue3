@@ -10,7 +10,7 @@ const routes = [
     {
         path: '/:eventId',
         name: 'Detail',
-        component: () => import('../components/DetailPage.vue'),
+        component: () => import('../layout/DetailPage.vue'),
         props: true,
     },
 ]
