@@ -3,14 +3,14 @@ import { createRouter, createWebHashHistory } from "vue-router"
 const routes = [
     {
         path: '/',
-        name: 'EventBoard',
-        component: () => import('../layout/EventBoard.vue'),
+        name: 'Home',
+        component: () => import('../layout/Home.vue'),
         props: true,
     },
     {
         path: '/:eventId',
         name: 'Detail',
-        component: () => import('../components/DetailPage.vue'),
+        component: () => import('../layout/DetailPage.vue'),
         props: true,
     },
 ]
