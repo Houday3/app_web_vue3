@@ -9,7 +9,7 @@ const eventList = ref(data);
 <template>
 	<div class="masonry-container">
 		<div v-for="item in eventList" :key="item.id" class="masonry-item" :style="{ height: item.height + 'px' }">
-			<EventCard :event="item"></EventCard>
+			<EventCard :event="item" :key="item.id"></EventCard>
 		</div>
 	</div>
 </template>

@@ -1,23 +1,37 @@
 <script setup>
 import Header from "./Header.vue";
+import { ArrowRightBold, ArrowLeftBold } from "@element-plus/icons-vue";
 import EventBoardByHowdy from "../layout/EventBoardByHowdy.vue";
 import EventBoardByDate from "../layout/EventBoardByDate.vue";
 import DetailPage from "../layout/DetailPage.vue";
-import { showDetail, bydate } from "../store/store";
-import { onMounted } from "vue";
+import { showDetail, bydate, detailEventId } from "../store/store";
+import { onMounted, ref } from "vue";
 
-onMounted(() => {
-	console.log("mounted");
-});
+const eventBoardByDate = ref();
+
+const handleRight = () => {
+	eventBoardByDate.value.goRight();
+};
+const handleLeft = () => {
+	eventBoardByDate.value.goLeft();
+};
+
+onMounted(() => {});
 </script>
 
 <template>
-	<DetailPage v-if="showDetail"></DetailPage>
+	<DetailPage v-if="showDetail" :key="detailEventId"></DetailPage>
 	<el-container :class="{ 'container-bydate': bydate }">
 		<el-header :class="{ 'header-bydate': bydate }"> <Header></Header></el-header>
 		<el-main :class="{ 'main-bydate': bydate }">
 			<template v-if="bydate">
-				<EventBoardByDate></EventBoardByDate>
+				<div class="button-wheel right" @click="handleRight()">
+					<el-icon><ArrowRightBold /></el-icon>
+				</div>
+				<div class="button-wheel left" @click="handleLeft()">
+					<el-icon><ArrowLeftBold /></el-icon>
+				</div>
+				<EventBoardByDate ref="eventBoardByDate"></EventBoardByDate>
 			</template>
 			<template v-else>
 				<EventBoardByHowdy></EventBoardByHowdy>
@@ -33,11 +47,32 @@ onMounted(() => {
 	display: flex;
 	flex-direction: column;
 }
-.header-bydate {
+.el-main {
+	position: relative;
 }
 .main-bydate {
 	flex-grow: 1;
 }
-.footer-bydate {
+.button-wheel {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 30px;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	opacity: 0.3;
+}
+.button-wheel:hover {
+	opacity: 1;
+	background: rgba(ff, ff, ff, 0.5);
+}
+.button-wheel.right {
+	right: 20px;
+}
+.button-wheel.left {
+	left: 20px;
 }
 </style>

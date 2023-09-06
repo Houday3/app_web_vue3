@@ -10,7 +10,13 @@ const routes = [
     {
         path: '/:eventId',
         name: 'Detail',
-        component: () => import('../layout/DetailPage.vue'),
+        component: () => import('../layout/Home.vue'),
+        props: true,
+    },
+    {
+        path: '/profile',
+        name: 'Profile',
+        component: () => import('../layout/ProfilePage.vue'),
         props: true,
     },
 ]

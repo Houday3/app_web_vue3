@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, ref } from "vue";
 import router from "../router";
-import { showDetail } from "../store/store";
+import { showDetail, detailEventId } from "../store/store";
 import dayjs from "dayjs";
 
 const props = defineProps(["event"]);
@@ -10,6 +10,7 @@ const event = props.event;
 const showInfo = ref(false);
 
 const handleClick = async () => {
+	detailEventId.value = event.id;
 	await router.push({ name: "Detail", params: { eventId: event.id } });
 	showDetail.value = true;
 };

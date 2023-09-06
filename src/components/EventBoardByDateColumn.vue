@@ -6,7 +6,6 @@ import { defineProps } from "vue";
 
 const props = defineProps(["eventsByDateObj"]);
 const eventsByDateObj = props.eventsByDateObj;
-console.log(eventsByDateObj);
 const today = dayjs().startOf("day");
 
 const formatDate = (date) => {
@@ -20,19 +19,22 @@ const formatDate = (date) => {
 <template>
 	<span class="date-label">{{ dayjs(eventsByDateObj.date).format("ddd") }}</span>
 	<span class="date-label underline">{{ formatDate(eventsByDateObj.date) }}</span>
-	<el-scrollbar>
+	<el-scrollbar class="bydate-column-scrollbar">
 		<template v-if="eventsByDateObj.events.length === 0">
 			<NoEventCard></NoEventCard>
 		</template>
 		<template v-else>
 			<div v-for="event in eventsByDateObj.events" :key="event.id" class="masonry-item">
-				<EventCard :event="event"></EventCard>
+				<EventCard :event="event" :eventId="event.id"></EventCard>
 			</div>
 		</template>
 	</el-scrollbar>
 </template>
 
 <style scoped>
+/* .bydate-column-scrollbar {
+	padding-right: 10px;
+} */
 .date-label {
 	font-weight: bold;
 	margin-bottom: 8px;

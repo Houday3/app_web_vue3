@@ -2,13 +2,10 @@
 import data from "../data/eventData.json";
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import dayjs from "dayjs";
-import EventCard from "../components/EventCard.vue";
-import NoEventCard from "../components/NoEventCard.vue";
 import EventBoardByDateColumn from "../components/EventBoardByDateColumn.vue";
 
 const eventList = data; //获取eventData.json中的数据
 
-const scrollbar = ref();
 const eventsByDate = ref([]);
 const eventsByDateShow = ref([]);
 const eventsByDateShowFront = ref([]);
@@ -32,7 +29,6 @@ for (let event of eventList) {
 		lastDate = eventDate;
 	}
 }
-console.log(firstDate, lastDate);
 
 for (let i = 0; i <= lastDate.diff(firstDate, "day"); i++) {
 	const date = firstDate.add(i, "day").format("YYYY-MM-DD");
@@ -55,8 +51,6 @@ for (let event of eventList) {
 		eventsByDate.value[eventDateIndex].events.push(event);
 	}
 }
-
-console.log(eventsByDate.value);
 
 //将eventsByDate中的数据按照日期排序
 let minColumnWidth = 256; // 每列的最小宽度
@@ -105,33 +99,69 @@ const loadEventsShowFront = (loadCount) => {
 	}
 	start = eventsByDate.value.findIndex((item) => item.date === firstElement.date) - loadCount;
 	end = start + loadCount;
+	start = start < 0 ? 0 : start;
 	eventsByDateShowFront.value.unshift(...eventsByDate.value.slice(start, end));
 };
 
 const isReachEnd = async (event) => {
+	console.log("wheel");
 	const scrollContainer = document.querySelector(".masonry-container-wrapper"); // 替换为实际的滚动容器的选择器
 	if (event.deltaX > 0) {
 		const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+		console.log(scrollContainer.scrollLeft);
 		if (scrollContainer.scrollLeft >= maxScrollLeft - 1) {
-			// console.log("Reached the end of the X axis.");
+			console.log("Reached the end of the X axis.");
 			// 加载eventsByDateShowBack
-			loadEventsShowBack(1);
+			loadEventsShowBack(3);
 		}
 	} else if (event.deltaX < 0) {
 		if (scrollContainer.scrollLeft <= 0) {
 			console.log("Reached the start of the X axis.");
 			// 加载eventsByDateShowFront
-			loadEventsShowFront(1);
+			loadEventsShowFront(3);
 		}
 	}
 };
+
+const max = ref(0);
+const value = ref(0);
+const innerRef = ref();
+const scrollbarRef = ref();
+
+const wheelRight = new WheelEvent("wheel", {
+	deltaX: 50,
+	bubbles: true,
+	cancelable: true,
+});
+const wheelLeft = new WheelEvent("wheel", {
+	deltaX: -50,
+	bubbles: true,
+	cancelable: true,
+});
+
+const goRight = () => {
+	const scrollContainer = document.querySelector(".masonry-container-wrapper");
+	scrollContainer.scrollLeft += 1000;
+	window.dispatchEvent(wheelRight);
+	// scrollbarRef.value.setScrollLeft(50);
+};
+const goLeft = () => {
+	const scrollContainer = document.querySelector(".masonry-container-wrapper");
+	scrollContainer.scrollLeft += -1000;
+	window.dispatchEvent(wheelLeft);
+};
+
+defineExpose({
+	goRight,
+	goLeft,
+});
 
 onMounted(() => {
 	//监听鼠标滚轮事件
 	window.addEventListener("wheel", isReachEnd);
 	//el-scrollbar的高度设置
-	const view = scrollbar.value.$el.querySelector(".el-scrollbar__view");
-	view.style.height = `${scrollbar.value.$el.clientHeight}px`;
+	const view = scrollbarRef.value.$el.querySelector(".el-scrollbar__view");
+	view.style.height = `${scrollbarRef.value.$el.clientHeight - 10}px`;
 });
 onBeforeUnmount(() => {
 	window.removeEventListener("wheel", isReachEnd);
@@ -140,7 +170,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<el-scrollbar ref="scrollbar">
+	<el-scrollbar ref="scrollbarRef">
 		<div class="masonry-container-wrapper">
 			<div class="masonry-container front">
 				<div v-for="(item, index) in eventsByDateShowFront" :key="index" class="masonry-column">
@@ -166,7 +196,8 @@ onBeforeUnmount(() => {
 	display: flex;
 	flex-wrap: nowrap;
 	height: 100%;
-	overflow-x: auto;
+	overflow-x: scroll;
+	padding-bottom: 10px;
 }
 .masonry-container {
 	display: flex;
@@ -181,13 +212,14 @@ onBeforeUnmount(() => {
 }
 .el-scrollbar {
 	flex-grow: 1;
+	box-sizing: border-box;
 }
 .date-label {
 	font-weight: bold;
 	margin-bottom: 8px;
 	text-align: center;
 }
-/* 
+/*
 @media (min-width: 768px) {
 	.masonry-column {
 		flex-basis: calc(33.33% - 16px);
