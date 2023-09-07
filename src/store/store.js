@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-export { showDetail, bydate, detailEventId, showLogin }
+export { showDetail, bydate, detailEventId, showLogin, isLogin }
 
 const showDetail = ref(false)
 const bydate = ref(false)
