@@ -13,17 +13,6 @@ const followList = reactive([
     <div class="follow-left">
       <img src="https://p.qqan.com/up/2020-11/16058518983314374.jpg" alt="" />
     </div>
-    <div class="follow-right">
-      <el-row class="follow-ifms">
-        <label for="" class="follow-name">Nancy</label>
-        <el-button class="certified">Certified</el-button>
-      </el-row>
-      <el-row class="career">
-        <el-button type="success" v-for="item in followList" :key="item.id" class="career-btn">{{
-          item.followName
-        }}</el-button>
-      </el-row>
-    </div>
   </el-row>
 </template>
 
@@ -36,40 +25,17 @@ const followList = reactive([
   position: relative;
   width: 100%;
   height: 400px;
-  background-color: pink;
+  background: linear-gradient(to left, rgb(234, 235, 249) 20%, rgb(136, 141, 194) 80%);
+  border-radius: 30px;
 }
 .follow-left {
-  width: 140px;
-  height: 140px;
+  position: absolute;
+  left: 200px;
+  width: 120px;
+  height: 120px;
 }
 .follow-left img {
-  margin-left: 50px;
   width: 100%;
-  border-radius: 70px;
-}
-.follow-right {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-left: 70px;
-}
-.follow-ifms {
-  top: 20px;
-}
-.follow-name {
-  font-size: 28px;
-}
-.certified {
-  height: 40px;
-  margin-left: 20px;
-  width: 120px;
-}
-.career {
-  position: absolute;
-  top: 70px;
-  flex-wrap: nowrap;
-}
-.career-btn {
-  width: 120px;
+  border-radius: 60px;
 }
 </style>
