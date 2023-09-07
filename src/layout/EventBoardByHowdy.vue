@@ -19,6 +19,7 @@ const eventList = ref(data);
 	display: flex;
 	flex-wrap: wrap;
 	gap: 16px;
+	padding: 0 16px;
 }
 
 .masonry-item {

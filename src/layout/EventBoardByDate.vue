@@ -160,8 +160,8 @@ onMounted(() => {
 	//监听鼠标滚轮事件
 	window.addEventListener("wheel", isReachEnd);
 	//el-scrollbar的高度设置
-	const view = scrollbarRef.value.$el.querySelector(".el-scrollbar__view");
-	view.style.height = `${scrollbarRef.value.$el.clientHeight - 10}px`;
+	// const view = scrollbarRef.value.$el.querySelector(".el-scrollbar__view");
+	// view.style.height = `${scrollbarRef.value.$el.clientHeight + 10}px`;
 });
 onBeforeUnmount(() => {
 	window.removeEventListener("wheel", isReachEnd);
@@ -170,7 +170,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<el-scrollbar ref="scrollbarRef">
+	<el-scrollbar class="scroll-container" ref="scrollbarRef">
 		<div class="masonry-container-wrapper">
 			<div class="masonry-container front">
 				<div v-for="(item, index) in eventsByDateShowFront" :key="index" class="masonry-column">
@@ -192,10 +192,14 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+.scroll-container {
+	height: fit-content;
+	/* margin: 0 16px; */
+	/* padding-bottom: 10px; */
+}
 .masonry-container-wrapper {
 	display: flex;
 	flex-wrap: nowrap;
-	height: 100%;
 	overflow-x: scroll;
 	padding-bottom: 10px;
 }
@@ -208,7 +212,7 @@ onBeforeUnmount(() => {
 	display: flex;
 	flex-direction: column;
 	flex-basis: calc(50% - 16px);
-	padding: 0 8px;
+	padding-left: 10px;
 }
 .el-scrollbar {
 	flex-grow: 1;

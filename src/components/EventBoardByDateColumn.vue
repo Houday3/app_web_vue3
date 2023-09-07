@@ -17,24 +17,37 @@ const formatDate = (date) => {
 </script>
 
 <template>
-	<span class="date-label">{{ dayjs(eventsByDateObj.date).format("ddd") }}</span>
-	<span class="date-label underline">{{ formatDate(eventsByDateObj.date) }}</span>
-	<el-scrollbar class="bydate-column-scrollbar">
-		<template v-if="eventsByDateObj.events.length === 0">
-			<NoEventCard></NoEventCard>
-		</template>
-		<template v-else>
-			<div v-for="event in eventsByDateObj.events" :key="event.id" class="masonry-item">
-				<EventCard :event="event" :eventId="event.id"></EventCard>
+	<div class="date-column-wrapper">
+		<span class="date-label">{{ dayjs(eventsByDateObj.date).format("ddd") }}</span>
+		<span class="date-label underline">{{ formatDate(eventsByDateObj.date) }}</span>
+		<el-scrollbar class="bydate-column-scrollbar">
+			<div class="bydate-column-scrollbar-wrapper">
+				<template v-if="eventsByDateObj.events.length === 0">
+					<NoEventCard></NoEventCard>
+				</template>
+				<template v-else>
+					<div v-for="event in eventsByDateObj.events" :key="event.id" class="masonry-item">
+						<EventCard :event="event" :eventId="event.id"></EventCard>
+					</div>
+				</template>
 			</div>
-		</template>
-	</el-scrollbar>
+		</el-scrollbar>
+	</div>
 </template>
 
 <style scoped>
-/* .bydate-column-scrollbar {
+.date-column-wrapper {
+	height: max-content;
+	display: flex;
+	flex-direction: column;
+}
+.bydate-column-scrollbar {
 	padding-right: 10px;
-} */
+	height: 775px;
+}
+.bydate-column-scrollbar-wrapper {
+	overflow-x: hidden;
+}
 .date-label {
 	font-weight: bold;
 	margin-bottom: 8px;

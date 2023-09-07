@@ -42,22 +42,30 @@ onMounted(() => {});
 </template>
 
 <style scoped>
-.container-bydate {
+/* .container-bydate {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+} */
+.el-header,
+.el-main,
+.el-footer {
+	padding: 0;
+}
+.el-header {
+	height: fit-content;
 }
 .el-main {
 	position: relative;
 }
-.main-bydate {
+/* .main-bydate {
 	flex-grow: 1;
-}
+} */
 .button-wheel {
 	width: 30px;
 	height: 30px;
 	position: absolute;
-	top: 30px;
+	top: 20px;
 	z-index: 1;
 	display: flex;
 	align-items: center;
